@@ -21,14 +21,20 @@
     #$usuario->login("root", "123456");
     #echo $usuario;
 
-
+    /*
+    //Criando um novo usuario
     $aluno = new Usuario();
-
-    $aluno->setDeslogin("aluno");
-    $aluno->setDessenha("aluno");
+    //foi para po __constructor
+    //$aluno->setDeslogin("aluno");
+    //$aluno->setDessenha("aluno");
 
     $aluno->insert();
 
     echo $aluno;
+    */
 
+    $usuario = new Usuario();
+    $usuario->loadById(17);
+    $usuario->update("professor", "professor");
 
+    echo $usuario;

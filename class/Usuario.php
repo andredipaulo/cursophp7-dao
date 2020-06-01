@@ -135,4 +135,22 @@ class Usuario{
 
 
     }
+
+    public function update($login, $password){
+
+        $this->setDeslogin($login);
+        $this->setDessenha($password);
+
+        $sql = new Sql();
+        $sql->query("update tb_usuarios set deslogin=:login, dessenha=:password where idusuario=:id", array(
+           ':login'=>$this->getDeslogin(),
+           ':password'=>$this->getDessenha(),
+           ':id'=>$this->getIdusuario()
+        ));
+    }
+
+    public function __construct($login="", $password="") {
+        $this->setDeslogin($login);
+        $this->setDessenha($password);
+    }
 }
