@@ -32,9 +32,16 @@
 
     echo $aluno;
     */
-
+    /*
+    //Alterar um usuario
     $usuario = new Usuario();
     $usuario->loadById(17);
     $usuario->update("professor", "professor");
 
+    echo $usuario;
+    */
+
+    $usuario = new Usuario();
+    $usuario->loadById(18);
+    $usuario->delete();
     echo $usuario;
