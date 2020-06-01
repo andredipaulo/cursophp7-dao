@@ -49,12 +49,10 @@ class Usuario{
 
         if (isset($resultado)){
 
-            $row = $resultado[0];
+            //$row = $resultado[0];
 
-            $this->setIdusuario($row['idusuario']);
-            $this->setDeslogin($row['deslogin']);
-            $this->setDessenha($row['dessenha']);
-            $this->setDtcadastro(new DateTime($row['dtcadastro']));
+            $this->setData($resultado[0]);
+
         }
     }
     // Método mágico
@@ -95,16 +93,44 @@ class Usuario{
         ));
 
         if(count($results)>0){
-
+            /*
             $row = $results[0];
 
             $this->setIdusuario($row['idusuario']);
             $this->setDeslogin($row['deslogin']);
             $this->setDessenha($row['dessenha']);
             $this->setDtcadastro(new Datetime ($row['dtcadastro']));
+            */
+
+            $this->setData($results[0]);
 
         }else{
             throw new Exception("Login e/ou senha invalidos");
+        }
+
+
+    }
+
+    public function setData($data){
+
+        $this->setIdusuario($data['idusuario']);
+        $this->setDeslogin($data['deslogin']);
+        $this->setDessenha($data['dessenha']);
+        $this->setDtcadastro(new Datetime ($data['dtcadastro']));
+
+    }
+
+    public function insert(){
+
+        $sql = new Sql();
+
+        $results = $sql->select("CALL sp_usuarios_insert(:login, :password)", array(
+            ':login'=>$this->getDeslogin(),
+            ':password'=>$this->getDessenha()
+        ));
+
+        if(count($results)>0){
+            $this->setData($results[0]);
         }
 
 
